@@ -40,7 +40,7 @@ def post_detail(request, post_id):
 def post_delete(request, post_id):
     post = get_object_or_404(PostTable, pk=post_id)
     post.delete()
-    return render(request, 'post_detail:post_list')
+    return redirect('post_detail:my_post_list')
 
 # 영화 후기 추천 view
 @csrf_exempt

@@ -79,7 +79,7 @@ def myinfo(request):
     context = { 'user_id':current.user_id,'password':current.password, 'email':current.email, 'user_name':current.user_name }
     return render(request, 'myinfo/info.html', context)
 
-# 마이페이지 수정
+# 마이페이지수정(프로필 정보 수정)
 @csrf_exempt
 def myinfo_edit(request):
     current_user_id = request.session['user_id_key']
