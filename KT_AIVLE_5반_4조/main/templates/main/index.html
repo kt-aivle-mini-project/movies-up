@@ -31,7 +31,7 @@
 					<h5>	문을 열어 영화를 공유해보세요		</h5><br><i class="icon-star"></i>
 				</div>
 				{% if request.user.is_authenticated %}
-					<div id="jamb" onclick="location.href='post_detail/post_list/'">
+					<div id="jamb" onclick="location.href='post_detail/my_post_list/'">
 				{% else %}
 					<div id="jamb" onclick="location.href='myinfo/login'">	
 				{% endif %}

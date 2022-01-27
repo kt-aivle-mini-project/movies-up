@@ -21,6 +21,15 @@ class MovieSearch(ListView):
             object_list = self.model.objects.none()
         return object_list
 
+# 메인페이지
+def index(request):
+    return render(request,'main/index.html')
+
+# 영화 장르 선택
+def select(request):
+    return render(request,'main/select.html')
+
+# 영화 장르별 리스트
 class MovieTag(ListView):
     model = Movie
 
@@ -41,22 +50,3 @@ def movie_detail_list(request, movie_id):
     movie = Movie.objects.get(movie_id=movie_id)
     contents = {'posts':posts, 'movie':movie}
     return render(request, 'main/detail_list_test.html', contents)
-
-class MovieDetailList(ListView):
-    model = PostTable
-    template_name ="main/detail_list_test.html"
-
-    def get_queryset(self):
-        self.movie_id = self.kwargs['movie_id']
-        return PostTable.objects.filter(movie_id = self.movie_id)
-
-    def get_context_data(self, **kwargs) :
-        context = super(MovieDetailList,self).get_context_data(**kwargs)
-        context['movie_id'] = PostTable.movie_id
-        return context
-
-def index(request):
-    return render(request,'main/index.html')
-
-def select(request):
-    return render(request,'main/select.html')

@@ -63,37 +63,10 @@ def comment_delete(request, comment_id):
     comment.delete()
     return redirect('post_detail:post_detail', post_id=comment.post_table.post_id)
 
-
-# 게시물 리스트 페이지
-def post_list(request):
-    posts = PostTable.objects.all()
-    return render(request, 'post_detail/post_list.html',{'posts':posts})
-
-# 게시물 상세 페이지
-@csrf_exempt
-def post_detail(request, post_id):
-    post = PostTable.objects.get(pk=post_id)
-    
-    # 댓글 작성 예외처리
-    try:
-        comments = CommentTable.objects.filter(post_table=post_id)
-    except:
-        comments = None
-    
-    if request.method == "POST":
-        form = CommentForm(request.POST)
-        
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.author = UserTable.objects.get(user_id=request.user.username)
-            comment.post_table = PostTable.objects.get(pk=post_id)
-            comment.content = request.POST['content']
-            comment.create_date = timezone.now()
-            comment.save()
-        else:
-            return render(request, 'post_detail/post_detail_test.html', {'post':post, 'comments':comments})        
-    
-    return render(request, 'post_detail/post_detail_test.html', {'post':post, 'comments':comments})
+# 작성자 게시물 리스트 페이지
+def my_post_list(request):
+    posts = PostTable.objects.filter(user_name=request.user.username)
+    return render(request, 'post_detail/my_post_list.html',{'posts':posts})
 
 # 게시물 작성 페이지
 def post_new(request):

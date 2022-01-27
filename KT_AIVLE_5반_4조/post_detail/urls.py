@@ -8,7 +8,7 @@ urlpatterns = [
     path('post/recommend/<int:post_id>', views.post_recommend, name='post_recommend'),
     path('post/detail/comment/delete/<int:comment_id>', views.comment_delete, name='comment_delete'),
     
-    path('post_list/',views.post_list, name='post_list'),
+    path('my_post_list/',views.my_post_list, name='my_post_list'),
     path('post_list/post_new/', views.post_new, name='post_new'),
     path('post_list/edit/<int:post_id>', views.post_edit, name='post_edit'),
 ]

@@ -10,7 +10,7 @@ from .forms import SignUpForm
 
 # 로그인
 @csrf_exempt
-def login(request):
+def log_in(request):
     if request.method == 'POST':
         user_id = request.POST.get('user_id')
         password = request.POST.get('password')
@@ -29,9 +29,9 @@ def login(request):
     return render(request, 'myinfo/login.html')
 
 
-# 회원가입 폼
+# 회원가입
 @csrf_exempt
-def form_model(request):
+def sign_up(request):
     form = SignUpForm(request.POST)
 
     if request.method == 'POST':
@@ -112,6 +112,6 @@ def member_del(request):
     return redirect('/')
 
 # 로그아웃
-def logout_view(request):
+def log_out(request):
     logout(request)
     return redirect('/')
