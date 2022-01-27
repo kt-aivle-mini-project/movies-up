@@ -64,11 +64,12 @@ def comment_delete(request, comment_id):
     return redirect('post_detail:post_detail', post_id=comment.post_table.post_id)
 
 
-# 정경님 코드
+# 게시물 리스트 페이지
 def post_list(request):
     posts = PostTable.objects.all()
     return render(request, 'post_detail/post_list.html',{'posts':posts})
 
+# 게시물 상세 페이지
 @csrf_exempt
 def post_detail(request, post_id):
     post = PostTable.objects.get(pk=post_id)
@@ -94,6 +95,7 @@ def post_detail(request, post_id):
     
     return render(request, 'post_detail/post_detail_test.html', {'post':post, 'comments':comments})
 
+# 게시물 작성 페이지
 def post_new(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)       
@@ -110,7 +112,7 @@ def post_new(request):
         form = PostForm()
     return render(request, 'post_detail/post_new.html',{'form':form})
 
-
+# 게시물 수정 페이지
 def post_edit(request, post_id):
     post = get_object_or_404(PostTable,pk=post_id)
     if request.method == 'POST':
