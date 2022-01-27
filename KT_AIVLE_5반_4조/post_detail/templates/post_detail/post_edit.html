@@ -77,10 +77,8 @@
                             </span>
                         </button>
 
-						<button onClick="location.href='{% url 'post_detail:post_delete' post.post_id %}'"  class="contact100-form-btn" style="padding: 5x 10px;"> 
-							<span>
-								삭제하기!
-							</span>
+						<button  class="contact100-form-btn" style="padding: 5x 10px;"> 
+                            <span> <a href="{% url 'post_detail:post_delete' post.post_id  %}" style = "color : #fff">삭제하기!</a></span>
 						</button>
                     </div>
 			</form>
