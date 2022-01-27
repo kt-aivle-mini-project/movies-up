@@ -1,0 +1,159 @@
+
+{% load static %}
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>소문</title>
+	<link rel="shortcut icon" type="image/x-icon" href="{% static 'img/logo32x32_line.png' %}">
+  <body>
+<body>
+
+  <link rel="stylesheet" href="{% static 'css/main_list.css' %}">
+  <link rel="stylesheet" href="{% static 'css/media_query.css' %}">
+  <link rel="stylesheet" href="{% static 'css/board.css' %}">
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900" rel="stylesheet" />
+</head>
+
+<body style="background-color: #43423E;">
+
+  <div class="container">
+
+    <header class="">
+      <div class="navbar">
+
+        <button class="navbar-menu-btn">
+          <span class="one"></span>
+          <span class="two"></span>
+          <span class="three"></span>
+        </button>
+
+        <nav class="">
+          <ul class="navbar-nav">
+
+            <li> <a href="/" class="navbar-link">Home</a> </li>
+            <li> <a href="/select/" class="navbar-link">TAG</a> </li>
+            <li> <a href="/myinfo/myinfo" class="navbar-link">MyPage</a> </li>
+
+          </ul>
+        </nav>
+
+        <div class="navbar-actions">
+
+          <form action="#" class="navbar-form">
+            <input type="text" name="search" placeholder="" class="navbar-form-search">
+
+            <button class="navbar-form-btn">
+              <ion-icon name="search-outline"></ion-icon>
+            </button>
+
+            <button class="navbar-form-close">
+              <ion-icon name="close-circle-outline"></ion-icon>
+            </button>
+          </form>
+
+          <button class="navbar-search-btn">
+            <ion-icon name="search-outline"></ion-icon>
+          </button>
+
+          <a href="/myinfo/login" class="navbar-signin">
+            <span>Sign in</span>
+          </a>
+
+        </div>
+
+      </div>
+    </header>
+    <main>
+
+      <section class="banner">
+        <div class="banner-card">
+        
+          
+          <img src="{{movie.movie_image_bg.url}}"   class="banner-img" alt="">
+
+          <div class="card-content">
+            <div class="play">
+              <ion-icon name="play-circle-outline"></ion-icon>
+            </div>
+            <div class="card-info">
+
+              <div class="genre">
+                <ion-icon name="film"></ion-icon>
+                <span>{{movie.genre_tag}}</span>
+              </div>
+
+              <div class="year">
+                <ion-icon name="calendar"></ion-icon>
+                <span>2021</span>
+              </div>
+
+              <div class="duration">
+                <ion-icon name="time"></ion-icon>
+                <span>2h 11m</span>
+              </div>
+
+              <div class="quality">4K</div>
+
+            </div>
+
+            <h2 class="card-title">{{movie.movie_title}}</h2>
+          </div>
+          
+        
+
+        </div>
+      </section>
+
+      <section class="movies">
+
+        <div class="filter-bar">
+          <ul id="board_list_head">
+            <li>
+              <span class="col1">번호</span>
+              <span class="col2">제목</span>
+              <span class="col3">작성자</span>
+              <span class="col5">작성일</span>
+              <span class="col6">추천수</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <div id="board_box">
+          <ul id="board_list">
+            {% for post in posts %}
+            <li>
+            <span class="col1">{{ post.post_id }}</span>
+            <span class="col2"><a href="/post_detail/{{ post.post_id }}">{{ post.post_title }}</a></span>
+            <span class="col3">{{ post.user_id }}</span>
+            <span class="col5">{{ post.date.month }}월 {{ post.date.day }}일</span>
+            <span class="col6">{{ post.recommender.count }}</span>
+            </li>
+            {% endfor %}
+          </ul> 
+        <div id="board_box">
+      </section>
+    </main>
+    
+  </div>
+
+
+  <!--
+    - custom js link
+  -->
+  <script src="{% static 'js/main_list.js' %}"></script>
+
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

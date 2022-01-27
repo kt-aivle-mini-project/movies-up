@@ -1,0 +1,99 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/post.css' %}" type="text/css" media="all" />
+<link rel="stylesheet" href="{% static 'css/comment.css' %}" type="text/css" media="all" />
+<head>
+  <title>소문</title>
+	<link rel="shortcut icon" type="image/x-icon" href="{% static 'img/logo32x32_line.png' %}">
+</head>
+<div class="movie-card">
+  
+    <div class="container">
+    {% if post.post_image %}
+      <a href="#"><img src="{{ post.post_image.url }}"  alt="cover" class="cover" /></a>
+    {% endif %}      
+      <div class="hero">
+        <div class="details">
+        
+          <div class="title1">{{ post.post_title }}<span class = "user">{{post.user_name.user_name}}</span></div>
+          <div class="title2">{{ post.date }}</div>    
+          <fieldset class="rating">
+            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+            <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+            <input type="radio" id="star4" name="rating" value="4" checked /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+            <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+            <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+            <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+            <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+          </fieldset>
+
+          <span class="likes" >
+            <a href="{% url 'post_detail:post_recommend' post.post_id  %}"
+            class="btn btn-sm btn-secondary btn-block my-1">{{ post.recommender.count }}</a> likes</span>
+
+        </div> <!-- end details -->
+      
+    </div> <!-- end hero -->
+
+    <div class="description">
+      
+        <div class="column1">
+          <span class="tag">{{ post.movie_id.get_genre_tag_display }}</span>
+        </div> <!-- end column1 -->
+        <div class="column2">
+            <p> {{ post.post_contents }} <a href="{% url 'post_detail:post_edit' post.post_id %}">  수정하기  </a></p>
+        </div> <!-- end column2 -->
+
+    </div> <!-- end description -->
+
+
+    <!-- Contenedor Principal -->
+  <div class="comments-container">
+    {% if not user.is_authenticated %}
+        <h2>아직 로그인을 안하셨군요? 로그인해서 다양한 의견을 나눠보세요! <a href="{% url 'myinfo:login'%}">  로그인하기  </a></h2>
+    {% else %}
+        <h2> 댓글을 달아 다양한 의견을 나눠보세요!</h2>
+    {% endif %}
+    <ul id="comments-list" class="comments-list">
+      <li>
+        {% for comment in comments %}
+        <!-- 댓글 리스트 -->
+        <ul class="comments-list reply-list">
+            <li>
+                <!-- user -->
+                <div class="comment-avatar"><img src="{% static 'img/ch.png' %}" alt=""></div>
+                <!-- Coment -->
+                <div class="comment-box">
+                    <div class="comment-head">
+                        <h6 class="comment-name">{{ comment.author }}</a></h6>
+                        <span>{{ comment.create_date }}</span>
+                        {% if request.user.username == comment.author.user_id %}
+                            <i class="fa fa-reply"><a href="{% url 'post_detail:comment_delete' comment.comment_id %}" class="btn btn-sm btn-outline-secondary">삭제</a></i>
+                        {% endif %}
+                        <i class="fa fa-heart"></i>
+                    </div>
+                    <div class="comment-content">
+                        {{ comment.content }}
+                    </div>
+                </div>
+            </li>
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+    {% if user.is_authenticated %}
+        <div>
+            <br>댓글 작성
+            <form action='' method="POST">
+                {% csrf_token %}
+                <textarea name="content" id="content" name="content" vlaue = ""></textarea><br>
+                <button class="primaryContained" type="submit">댓글 추가하기</button> 
+            </form>
+        </div>
+    {% endif %}
+  </div>
+  </div> <!-- end container -->
+</div> <!-- end movie-card -->

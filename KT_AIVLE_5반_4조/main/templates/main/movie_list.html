@@ -1,0 +1,117 @@
+{% load static %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all" />
+<script type="text/javascript" src="{% static 'js/jquery-1.4.2.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery-func.js' %}"></script>
+<!--[if IE 6]><link rel="stylesheet" href="css/ie6.css" type="text/css" media="all" /><![endif]-->
+</head>
+<title>소문</title>
+<link rel="shortcut icon" type="image/x-icon" href="{% static 'img/logo32x32_line.png' %}">
+<body style="background-color: #d5cbdd;">
+<!-- START PAGE SOURCE -->
+<div id="shell">
+  <div id="header">
+    <div id="navigation">
+      <ul>
+        <li><a class="active" href="/">HOME</a></li>
+        <li><a href="/myinfo/myinfo">MY PAGE</a></li>
+      </ul>
+    </div>
+    <div id="sub-navigation">
+      <ul>
+        <li><a href="{% url 'movies:movie_tag' 'action' %}"># 액션</a></li>
+        <li><a href="{% url 'movies:movie_tag' 'horror' %}"># 호러 </a></li>
+        <li><a href="{% url 'movies:movie_tag' 'drama' %}"># 드라마</a></li>
+        <li><a href="{% url 'movies:movie_tag' 'comedy' %}"># 코미디</a></li>
+        <li><a href="{% url 'movies:movie_tag' 'romance' %}"># 로맨스</a></li>
+      </ul>
+      <div id="search">
+        <form action="" method="GET" accept-charset="utf-8">
+          <label for="search-field">SEARCH</label>
+          <input type="text" name="query" value="{{request.GET.q}}" id="search-field" class="blink search-field"  placeholder="영화 이름을 입력하세요" />
+          <input type="submit" value="검색!" class="search-button" />
+        </form>
+      </div>
+    </div>
+  </div>
+  <div id="main">
+    <div id="content">
+
+      <div class="box">
+        <div class="head">
+            {% if recently_added %}
+                <h2>LATEST Movie</h2>
+            {% endif %}
+            <p class="text-right"><a href="#">See all</a></p>
+        </div>
+
+        {% for movie in recently_added%}    
+          <div class="movie" onClick="location.href='{% url 'movies:list' movie.movie_id %}'">                               
+              <div class="movie-image"><span class="play"><span class="name">{{movie.movie_title}}</span></span><img src="{{movie.movie_image_info.url}}" alt=""></div>
+              <div class="rating"><p>RATING</p><div class="stars"><div class="stars-in"></div></div><span class="comments">19</span></div>
+          </div>
+            {% empty %}
+            <h1> 아직 등록된 영화가 없습니다. </h1>
+            {% endfor %}
+            <div class="cl">&nbsp;</div>
+        </div>
+      </div>
+      <div class="box">
+        <div class="head">
+          {% if top_rated %}
+                <h2>TOP RATED</h2>
+          {% endif %}
+          <p class="text-right"><a href="#">See all</a></p>
+        </div>
+        {% for movie in top_rated%}
+        <div class="movie" onClick="location.href='{% url 'movies:list' movie.movie_id %}'">
+          <div class="movie-image"> <span class="play"><span class="name">{{movie.movie_title}}</span></span> <a href=""><img src="{{movie.movie_image_info.url}}" alt="" /></a> </div>
+          <div class="rating">
+              <p>RATING</p>
+              <div class="stars">
+                  <div class="stars-in"> </div>
+              </div>
+              <span class="comments">19</span> </div>
+          </div>
+          {% empty %}
+          <h1> 아직 등록된 영화가 없습니다. </h1>
+          {% endfor %}
+          <div class="cl">&nbsp;</div>
+        </div>
+         
+        <div class="box">
+          <div class="head">
+            {% if most_commented %}
+                  <h2>MOST COMMENTED</h2>
+            {% endif %}
+            <p class="text-right"><a href="#">See all</a></p>
+          </div>
+
+          {% for movie in most_commented%}
+          <div class="movie" onClick="location.href='{% url 'movies:list' movie.movie_id %}'">
+            <div class="movie-image"> <span class="play"><span class="name">{{movie.movie_title}}</span></span> <a href=""><img src="{{movie.movie_image_info.url}}" alt="" /></a> </div>
+            <div class="rating">
+                <p>RATING</p>
+                <div class="stars">
+                    <div class="stars-in"> </div>
+                </div>
+                <span class="comments">19</span> </div>
+            </div>
+            {% empty %}
+            <h1> 아직 등록된 영화가 없습니다. </h1>
+            {% endfor %}
+            <div class="cl">&nbsp;</div>
+          </div>
+    </div>
+    <div class="cl">&nbsp;</div>
+  </div>
+  <div id="footer">
+<!-- footer 추가예정 -->
+  </div>
+</div>
+
+</html>

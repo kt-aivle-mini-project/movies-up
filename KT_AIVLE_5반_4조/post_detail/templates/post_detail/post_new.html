@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>소문</title>
+	<link rel="shortcut icon" type="image/x-icon" href="{% static '/img/logo32x32_line.png' %}">
+	<link rel="stylesheet" type="text/css" href="{% static '/css/post_new.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/board.css' %}">
+	<script src="{% static '/js/jquery.min.js' %}"></script>
+	<script src="{% static '/js/input.js' %}"></script>
+</head>
+
+
+<body>
+    <header>
+        <h1 class="title">영화 공유하기 📝</h1>
+            <nav>
+                <img class="logo" src="{% static 'img/logo32x32.png' %}" alt="홈페이지로 돌아가기" onclick="location.href='/'">
+            </nav>
+    </header>
+    <div id="board_box">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            {% if form.errors %}
+            <div class="aler alert-danger" role="alert">
+                {% for field in form %}
+                    {% if field.errors %}
+                        <strong>{{ field.label }}</strong>
+                        {{ field.errors }}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+            <ul id="board_form">
+
+                <li>
+                    <span class="col1"><label for="post_title">제목</label></span>
+                    <span class="col2"><input type="text" name="post_title" value="{{ PostForm.post_title|default_if_none:'' }}"></span>
+                </li>	  
+
+                <li id="text_area">	
+                    <span class="col2">
+                        <textarea name="post_contents" value="{{ PostForm.post_contents|default_if_none:'' }}"></textarea>
+                    </span>
+                </li>   
+                <li>
+                    <span class="col1"><label for="post_image">사진을 선택하세요</label></span>
+                    <span class="col2"><input type="file" name="post_image" accept="images/*" ></span>
+                </li>
+            </ul>
+            <button type="submit" class="save btn btn-default">Save</button>         
+        </form>
+    </div>
+</body>
+</html>
