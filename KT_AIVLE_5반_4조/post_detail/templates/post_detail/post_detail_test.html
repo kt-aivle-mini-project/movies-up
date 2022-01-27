@@ -47,7 +47,7 @@
         </div> <!-- end column1 -->
         <div class="column2">
             <p> {{ post.post_contents }} 
-              {% if request.user.is_authenticated %}
+              {% if post.user_name.user_name == request.user.username %}
                 <a href="{% url 'post_detail:post_edit' post.post_id %}">  수정하기  </a>
               {% endif %}
               </p>
