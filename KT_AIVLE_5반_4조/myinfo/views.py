@@ -9,7 +9,7 @@ from .models import UserTable
 from .forms import SignUpForm
 
 
-#프로필(이정현)
+# 마이페이지(프로필 정보 조회)
 @csrf_exempt
 def myinfo(request):
     current_user_id = request.session['user_id_key']
@@ -18,7 +18,7 @@ def myinfo(request):
     return render(request, 'myinfo/info.html', context)
 
 
-#프로필수정(이정현)
+# 마이페이지 수정
 @csrf_exempt
 def myinfo_edit(request):
     current_user_id = request.session['user_id_key']
@@ -40,7 +40,7 @@ def myinfo_edit(request):
     context = { 'user_id':current.user_id, 'password':current.password, 'email':current.email, 'user_name':current.user_name }
     return render(request, 'myinfo/info_edit.html', context)
 
-#회원탈퇴(이정현)
+# 회원탈퇴
 def member_del(request):
     current_user_id = request.session['user_id_key']
     data1 = UserTable.objects.get(pk = current_user_id)
@@ -50,7 +50,7 @@ def member_del(request):
     logout(request)
     return redirect('/')
 
-# 로그아웃(이정현)
+# 로그아웃
 def logout_view(request):
     logout(request)
     return redirect('/')
@@ -67,9 +67,7 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            #####정우님 login 에 추가되어야 하는 부분######
             request.session['user_id_key'] = UserTable.objects.get(user_id=user_id, password=password).user_id
-            #############################################
             return redirect('../../')
         else:
             error_message = '아이디와 비밀번호가 일치하지 않습니다.'
