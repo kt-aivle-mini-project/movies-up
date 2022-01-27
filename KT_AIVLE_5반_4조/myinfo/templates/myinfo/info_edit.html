@@ -43,7 +43,8 @@
             </ul>
         </div>
         <button type="submit" class="switch" ><span style="text-decoration: double;">수정 완료</span></button>
-        <button type="submit" class="switch" onClick="location.href='{% url 'myinfo:member_del' %}'" ><span style="text-decoration: double;">탈퇴하기</span></button>
+        <button class="switch" ><span style="text-decoration: double;"> <a href="{% url 'myinfo:member_del' %}" style = "color : #fff" >탈퇴하기</a></span></button> 
+        
 	</form>   
     
 </body>
