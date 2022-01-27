@@ -37,7 +37,6 @@
 
             <li> <a href="/" class="navbar-link">Home</a> </li>
             <li> <a href="/select/" class="navbar-link">TAG</a> </li>
-            <li> <a href="/myinfo/myinfo" class="navbar-link">MyPage</a> </li>
 
           </ul>
         </nav>
@@ -59,10 +58,12 @@
           <button class="navbar-search-btn">
             <ion-icon name="search-outline"></ion-icon>
           </button>
+          {% if request.user.is_authenticated %}
+            <a href="/myinfo/myinfo" class="navbar-signin"><span>MY PAGE</span></a>
+          {% else %}
+            <a href="/myinfo/login" class="navbar-signin"><span>LOGIN</span></a>
+          {% endif %}
 
-          <a href="/myinfo/login" class="navbar-signin">
-            <span>Sign in</span>
-          </a>
 
         </div>
 

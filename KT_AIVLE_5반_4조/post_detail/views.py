@@ -40,7 +40,7 @@ def post_detail(request, post_id):
 def post_delete(request, post_id):
     post = get_object_or_404(PostTable, pk=post_id)
     post.delete()
-    return redirect('/post_detail')
+    return render(request, 'post_detail:post_list')
 
 # 영화 후기 추천 view
 @csrf_exempt
@@ -75,10 +75,10 @@ def post_new(request):
         if form.is_valid():
             post = form.save(commit=False)
             movie_id = request.POST.getlist('movie_id')[0]
-            post.user_id = UserTable.objects.get(user_id=request.user.username)
+            post.user_name = UserTable.objects.get(user_id=request.user.username)
             post.movie_id = Movie.objects.get(movie_id = movie_id)
             post.save()
-            return redirect('post_detail:post_detail',pk=post.pk)
+            return redirect('post_detail:post_detail',post_id=post.pk)
         else:
             return render(request, 'post_detail/post_new.html', {'form': form})
     else:
@@ -96,5 +96,6 @@ def post_edit(request, post_id):
             post.save()
             return redirect('post_detail:post_detail', post_id=post.post_id)
     else:
-        form = PostForm(instance=post)
-    return render(request, 'post_detail/post_edit.html', {'form':form})
+        form = EditForm(instance=post)
+        # form = EditForm(request.POST, request.FILES, instance=post)
+    return render(request, 'post_detail/post_edit.html', {'form':form, "post":post})

@@ -18,7 +18,11 @@
     <div id="navigation">
       <ul>
         <li><a class="active" href="/">HOME</a></li>
-        <li><a href="/myinfo/myinfo">MY PAGE</a></li>
+        {% if request.user.is_authenticated %}
+          <li><a href="/myinfo/myinfo">MY PAGE</a></li>
+				{% else %}
+          <li><a href="/myinfo/login">LOGIN</a></li>
+				{% endif %}
       </ul>
     </div>
     <div id="sub-navigation">

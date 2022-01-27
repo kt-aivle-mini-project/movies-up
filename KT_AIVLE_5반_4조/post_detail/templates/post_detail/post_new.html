@@ -1,58 +1,109 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html >
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>소문</title>
-	<link rel="shortcut icon" type="image/x-icon" href="{% static '/img/logo32x32_line.png' %}">
-	<link rel="stylesheet" type="text/css" href="{% static '/css/post_new.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static '/css/board.css' %}">
-	<script src="{% static '/js/jquery.min.js' %}"></script>
-	<script src="{% static '/js/input.js' %}"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/css/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/css/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/css/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/css/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static '/css/main_input.css' %}">
+<!--===============================================================================================-->
+
+<!--===============================================================================================-->
+<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+
+	<script src="js/main.js"></script>
 </head>
-
-
 <body>
-    <header>
-        <h1 class="title">영화 공유하기 📝</h1>
-            <nav>
-                <img class="logo" src="{% static 'img/logo32x32.png' %}" alt="홈페이지로 돌아가기" onclick="location.href='/'">
-            </nav>
-    </header>
-    <div id="board_box">
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
+
+
+	<div class="container-contact100">
+
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form" id="form1" method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+                <span class="contact100-form-title">
+					영화를 소문내보세요! 📝
+				</span>
             
-            {% if form.errors %}
-            <div class="aler alert-danger" role="alert">
-                {% for field in form %}
-                    {% if field.errors %}
-                        <strong>{{ field.label }}</strong>
-                        {{ field.errors }}
-                    {% endif %}
-                {% endfor %}
-            </div>
-            {% endif %}
-            <ul id="board_form">
+                    <div class="wrap-input100 validate-input" data-validate="영화를 선택해주세요!">
+                        <select name="movie_id" class = "input100">
+                            {% for movie in form.movie_id_list %}
+                            {{ movie }}
+                            {% endfor %}
+                        </select>
+                        <span class="focus-input100"></span>
+                    </div>
 
-                <li>
-                    <span class="col1"><label for="post_title">제목</label></span>
-                    <span class="col2"><input type="text" name="post_title" value="{{ PostForm.post_title|default_if_none:'' }}"></span>
-                </li>	  
+                    <div class="wrap-input100 validate-input" data-validate = "후기 제목을 작성해주세요!">
+                        <input class="input100" type="text" name="post_title" placeholder="후기 제목">
+                        <span class="focus-input100"></span>
+                    </div>
 
-                <li id="text_area">	
-                    <span class="col2">
-                        <textarea name="post_contents" value="{{ PostForm.post_contents|default_if_none:'' }}"></textarea>
-                    </span>
-                </li>   
-                <li>
-                    <span class="col1"><label for="post_image">사진을 선택하세요</label></span>
-                    <span class="col2"><input type="file" name="post_image" accept="images/*" ></span>
-                </li>
-            </ul>
-            <button type="submit" class="save btn btn-default">Save</button>         
-        </form>
-    </div>
+                    <div class="wrap-input100 validate-input" data-validate = "이미지를 업로드해주세요!">
+                        <input class="input100" type="file" name="post_image"  accept="images/*"  placeholder="이미지 업로드">
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate = "Please enter your post">
+                        <textarea class="input100" name="post_contents" placeholder="영화 후기 작성"></textarea>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="container-contact100-form-btn">
+                        <button type="submit" class="contact100-form-btn">
+                            <span>
+                                작성하기!
+                            </span>
+                        </button>
+                    </div>
+			</form>
+		</div>
+	</div>
+
+
+
+	<div id="dropDownSelect1"></div>
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
 </body>
 </html>

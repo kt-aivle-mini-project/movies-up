@@ -10,7 +10,7 @@
   
     <div class="container">
     {% if post.post_image %}
-      <a href="#"><img src="{{ post.post_image.url }}"  alt="cover" class="cover" /></a>
+      <a href="/"><img src="{{ post.post_image.url }}"  alt="cover" class="cover" /></a>
     {% endif %}      
       <div class="hero">
         <div class="details">
@@ -30,9 +30,11 @@
             <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
           </fieldset>
 
-          <span class="likes" >
+          {% if request.user.is_authenticated %}
+            <span class="likes" >
             <a href="{% url 'post_detail:post_recommend' post.post_id  %}"
             class="btn btn-sm btn-secondary btn-block my-1">{{ post.recommender.count }}</a> likes</span>
+          {% endif %}
 
         </div> <!-- end details -->
       
@@ -44,7 +46,11 @@
           <span class="tag">{{ post.movie_id.get_genre_tag_display }}</span>
         </div> <!-- end column1 -->
         <div class="column2">
-            <p> {{ post.post_contents }} <a href="{% url 'post_detail:post_edit' post.post_id %}">  수정하기  </a></p>
+            <p> {{ post.post_contents }} 
+              {% if request.user.is_authenticated %}
+                <a href="{% url 'post_detail:post_edit' post.post_id %}">  수정하기  </a>
+              {% endif %}
+              </p>
         </div> <!-- end column2 -->
 
     </div> <!-- end description -->
