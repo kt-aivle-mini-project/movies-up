@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>소문</title>
+	<link rel="shortcut icon" type="image/x-icon" href="{% static '/img/logo32x32_line.png' %}">
+	<link rel="stylesheet" type="text/css" href="{% static '/css/my_input.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/board_style.css' %}">
+    <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="{% static '/js/jquery.min.js' %}"></script>
+	<script src="{% static '/js/input.js' %}"></script>
+</head>
+
+
+    <body >
+        <header>
+            <h1 class="title">나의 후기 📚</h1>
+                <nav>
+                    <img class="logo" src="{% static 'img/logo32x32.png' %}" alt="홈페이지로 돌아가기" onclick="location.href='/'">
+                </nav>
+        </header>
+        <div class="container">
+            <div id="board">
+        <table id="table_board" class="list">
+            <colgroup>
+                <col width="150">
+                <col width="60%">
+                <col width="250">
+                <col width="100">
+                <col width="150">
+            </colgroup>
+		<thead >
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>추천</th>
+				<th>등록일</th>
+			</tr>
+		</thead>
+            <tbody>
+                
+                {% for post in posts %}
+                <tr>
+                    <p >  
+                        <td ><a href = "{% url 'post_detail:post_edit' post.post_id %}"> {{post.post_id}} </a></td>
+                        <td><a href = "{% url 'post_detail:post_edit' post.post_id %}"> {{post.post_title}}</a></td>
+                        <td><a href = "{% url 'post_detail:post_edit' post.post_id %}"> {{post.user_id}}</a></td>
+                        <td><a href = "{% url 'post_detail:post_edit' post.post_id %}"> 13</a></td>
+                        <td><a href = "{% url 'post_detail:post_edit' post.post_id %}"> {{post.date.month}} / {{post.date.day}} </a> </td>
+                        </a>
+                    </p>    
+                </tr>    
+                {% endfor %}
+                
+            </tbody> 
+            <tfoot>
+                <tr>
+                    <td colspan="5">
+                        <a href="../post_list/post_new/">글쓰기  </a>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    </body>
+    </html>

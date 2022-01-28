@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+@font-face {
+    font-family: 'SF_HambakSnow';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Pretendard-Light';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'SBAggroB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+	text-align: center;
+	align-self: center;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: middle;
+	-moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+	background-color: #f3f3f3;
+	padding-top: 330px;
+}
+
+header {
+    display: block;
+}
+
+header {
+    width: 100%;
+    height: 250px;
+    background: #f0dbff;
+    text-align: center;
+    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    z-index: 300;
+}
+
+header h1 {
+    font-family: "SBAggroB";
+    font-size: 3em;
+    font-weight: 500;
+    color: #905bb5;
+    line-height: 230px;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+header nav {
+    position: absolute;
+    bottom: 0;
+    width: 110%;
+    height: 60px;
+    line-height: 60px;
+    width: 100%;
+    background: #905bb5;
+    cursor: pointer;
+}
+
+
+textarea {
+    position: relative;
+	width: 30%;
+	height: 15px;
+	text-align: left;
+    margin-left: 55px;
+	resize: none;
+	border-radius: 5px;
+	border: 1px solid #fe838b;
+	z-index: 1;
+}
+
+textarea:focus {
+	outline: none;
+	box-shadow: 0 0 0 2px #905bb5;
+}
+
+textarea::-webkit-scrollbar {
+    width: 10px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #905bb5;
+    width: 8px;
+    border: 1px solid #feb737;
+}
+
+textarea::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #feb737;
+}
+

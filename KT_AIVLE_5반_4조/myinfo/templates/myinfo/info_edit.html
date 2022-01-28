@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>소문</title>
+	<link rel="shortcut icon" type="image/x-icon" href="{% static '/img/logo32x32_line.png' %}">
+	<link rel="stylesheet" type="text/css" href="{% static '/css/input.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/board.css' %}">
+	<script src="{% static '/js/jquery.min.js' %}"></script>
+	<script src="{% static '/js/input.js' %}"></script>
+</head>
+<body>
+	<header>
+		<h1 class="title">마이페이지 수정 ✏️</h1>
+		<nav>
+			<img class="logo" src="{% static 'img/logo32x32.png' %}" alt="홈페이지로 돌아가기" onclick="location.href='/'">
+		</nav>
+	</header>
+    <form action="{% url 'myinfo:myinfo_edit' %}", method="POST">
+        <div id="board_box">
+            <ul id="board_form" >
+                <h3 id="board_title">
+                    비밀번호와 이메일만 수정이 가능합니다.
+                </h3>
+                <li>
+                    <span class="col1">이름  </span>
+                    <span class="col2">{{ user_name }}</span>
+                </li>
+                <li>
+                    <span class="col1">아이디  </span>
+                    <span class="col2">{{ user_id }}</span>
+                </li>
+                <li>
+                    <span class="col1"><label for="new_password">비밀번호</label></span>
+                    <span class="col2"> <input type="text" name="new_password" id="new_password" value = {{ password }} required></span>
+                </li>
+                <li>
+                    <span class="col1"><label for="new_email">이메일</label></span>
+                    <span class="col2"> <input type="text" name="new_email" id="new_email" value= {{ email }}></span>
+                </li>
+            </ul>
+        </div>
+        <button type="submit" class="switch" ><span style="text-decoration: double;">수정 완료</span></button>
+        <button class="switch" ><span style="text-decoration: double;"> <a href="{% url 'myinfo:member_del' %}" style = "color : #fff" >탈퇴하기</a></span></button> 
+        
+	</form>   
+    
+</body>
+</html>

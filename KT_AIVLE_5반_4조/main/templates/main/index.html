@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>소문</title>
+	<link rel="shortcut icon" type="image/x-icon" href="{% static 'img/logo32x32_line.png' %}">
+
+	<!-- CSS 연결 -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/jquery.fullPage.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+	<!-- JS 연결 -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src=" {% static 'js/jquery.fullPage.js' %}"></script>
+	<script type="text/javascript" src=" {% static 'js/main.js' %}"></script>
+</head>
+<body>
+	
+	<button class="switch" onClick="location.href='/select'"><span style="text-decoration: double;">찾아보기</span></button>
+	
+	<!-- 메인 (fullpage) -->
+	<main id="fullpage">
+		<!-- 홈페이지 -->
+		<section class="section">
+			<div class="back">
+				<div class="title">
+					<h6>당신의 영화 소통의 문이 되어줄</h6>
+					<h1>소문</h1><br>
+					<h5>	문을 열어 영화를 소문내보세요!		</h5><br><i class="icon-star"></i>
+				</div>
+				{% if request.user.is_authenticated %}
+					<div id="jamb" onclick="location.href='post_detail/my_post_list/'">
+				{% else %}
+					<div id="jamb" onclick="location.href='myinfo/login'">	
+				{% endif %}
+					<div class="side" id="side1"></div>
+					<div class="side" id="side2"></div>
+					<div class="side" id="side3"></div>
+					<div class="side" id="side4"></div>
+					<div class="crack" id="door">
+						<div id="knob"></div>
+						<div id="porthole"></div>
+					</div>
+				</div>
+					<div class="text">>> 문을 열어보세요</div>
+			</div>
+		</section>
+
+		<!-- 소개 페이지 -->
+		<section class="section"> 
+			<div class="slide">
+				<p class="p0"><em> 지금 </em>가장 <em> 핫 </em>한 영화</p>
+				<img style="height: 40%;" src=" {% static 'img/rank1.png' %}">
+				<p class="p1"><em>#액션</em>  스파이더맨 : 노웨이홈</p>
+			</div>
+			<div class="slide">
+				<p class="p0"><em> 영화에 </em>빠질 수 없는 <em> # 드라마 </em></p>
+				<img style="height: 40%;" src=" {% static 'img/King.jpg' %}">
+				<p class="p1"><em>#드라마</em>  킹메이커</p>
+			</div>
+			<div class="slide">
+				<p class="p0"> <em> 가볍게 </em>볼 수 있는 <em> # 코미디 </em></p>
+				<img style="height: 40%;" src=" {% static 'img/rank2.jpeg' %}">
+				<p class="p1"><em>#코미디</em>  해적</p>
+			</div>
+			<div class="slide">
+				<p class="p6"> 영화 <strong> 소통 </strong>의 <strong> 문 </strong>이 되어줄 <br><em>"소문"</em>을 경험해보세요!</p>
+				<img src=" {% static 'img/video3.png' %}">
+			</div>
+		</section>
+
+		<!-- ask & footer -->
+		<section class="section fp-auto-height">
+			<p class="padding"></p>
+			<p class="p0">자세한 문의는 <br>하단의 <em> Github 로고 </em> 를 눌러주세요.</p>
+			<a href="https://github.com/kt-aivle-mini-project/movies-up" target="_blank" class="ask"><span style="overflow: hidden;"><img class="github" src="{% static 'img/github.png' %}"></span></a>
+			<p class="padding"></p>
+			<p class="padding"></p>
+			<p class="footer">ⓒ MiniProject 4조</p>
+		</section>
+</body>
+</html>
